@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "closedform-agentic-rag"
+version = "1.0.0"
+description = "Python client for the Closed-Form Agentic RAG orchestration API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Angshul Majumdar" }]
+dependencies = ["httpx>=0.27,<1"]
+keywords = ["agentic-rag", "orchestration", "llm", "rag", "api-client", "cost-aware"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.setuptools.packages.find]
+include = ["closedform_rag*"]
