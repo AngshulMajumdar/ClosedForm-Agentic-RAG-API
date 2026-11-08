@@ -1,0 +1,65 @@
+# ILLUSTRATIVE self-hosted option, NOT a currently published/verified image.
+# Replace YOUR_REGISTRY/closedform-agentic-rag-api:VERSION with a real built image.
+# Create closedform-rag-secrets with API_TOKEN, LLM credentials, RETRIEVAL_URL,
+# calibrated policy configuration, etc. before deploying. Use API gateway
+# for per-user auth, metering, and rate limiting. This is not for HF Space directly.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: closedform-rag-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: closedform-rag-api }
+  template:
+    metadata:
+      labels: { app: closedform-rag-api }
+    spec:
+      containers:
+        - name: api
+          image: YOUR_REGISTRY/closedform-agentic-rag-api:VERSION
+          ports:
+            - containerPort: 7860
+          envFrom:
+            - secretRef:
+                name: closedform-rag-secrets
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { cpu: '1', memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /ready, port: 7860 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 7860 }
+            initialDelaySeconds: 10
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: closedform-rag-api
+spec:
+  selector: { app: closedform-rag-api }
+  ports:
+    - port: 80
+      targetPort: 7860
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: closedform-rag-api
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: closedform-rag-api
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 65

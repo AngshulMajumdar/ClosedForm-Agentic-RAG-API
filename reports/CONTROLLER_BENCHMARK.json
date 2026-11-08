@@ -1,0 +1,14 @@
+{
+  "experiment": "CPU-only closed-form decision kernel; no HTTP or model calls",
+  "command": "python bench_controller.py --requests 10000 --actions 20",
+  "measurements": {
+    "calls": 10000,
+    "actions_per_call": 20,
+    "mean_ms": 0.019538,
+    "p50_ms": 0.017326,
+    "p95_ms": 0.018207,
+    "p99_ms": 0.034733,
+    "controller_llm_calls": 0
+  },
+  "limitations": "Local-process CPU timing, not production throughput or end-to-end answer latency."
+}

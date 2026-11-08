@@ -1,0 +1,24 @@
+{
+  "description": "SHA-256 hashes from the exact corrected, tested HF Docker Space ZIP.",
+  "original_zip": "ClosedForm-Agentic-RAG_Docker_Final_YAML_Fixed.zip",
+  "server_changed": false,
+  "readme_preserved_as": "docs/HF_SPACE_README.md",
+  "original_space_files_sha256": {
+    "Dockerfile": "e437a2b6cb60a9cecf7262f7054908f939368c89b526a04beaaa92f449a7f56e",
+    "ENVIRONMENT.example": "024032eb8b2bd7787e4fb8a581c151584bdbd43727120ec0fe8fbe6660ca33f6",
+    "README.md": "fec91aa6aa39687fc6ebbf29fd8822d061f54dc313c522a4e8055a3c68cbb655",
+    "bench_controller.py": "3c14d4d37a10c6ed750fc29cb94477650198b2f2f8279c18618dcb8b21cdc134",
+    "collect_calibration.py": "8044dd37ef0d81c4d94990e99ebd05ce2d9caae7a96bbe7cb23474aca8ca91be",
+    "fit_policy.py": "0ec857ddc77b5ddef349ebe767d03f97664764d62ca33e7d8e5fd0e5c2a2f78f",
+    "requirements.txt": "bf08ceec548536109379fc60a98e2ec9afac95f51b68072cc60ec5a4e0a7f4d0",
+    "config/actions.json": "8a2649a7e2bcea0c849f0beb67d2f8ec2e85c55e6aade9db52c34a797ba6ef24",
+    "service/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "service/api.py": "b7affebcf4374cdc16b92311cc2d7f922a5070fa9cc889558281b2c82bd16b13",
+    "service/backend.py": "2f2ab04052608afc5302fb5239ccf21227a54b46522e15b0b9e3fa8b4bf74ed7",
+    "service/config.py": "7d257ad5274578076a3bdf96066b154cd84719ae001ff7317cd1b015f610ba31",
+    "service/policy.py": "f8fe691ba945435820a0d4a2474c873b7e77adf8f89e4779181c4c7f9ce3b602",
+    "tests/test_api.py": "b37973d9d8a977e951888e51b880821c0861ee8d3ceb5e0d5bc1d4f70b267e1a",
+    "examples/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "examples/retriever_stub.py": "cda9134334f798893ec0abe3dcfce85722717a2844db50070923a5052288b0d6"
+  }
+}

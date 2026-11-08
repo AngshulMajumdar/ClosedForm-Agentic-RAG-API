@@ -1,0 +1,16 @@
+{
+  "name": "closedform-agentic-rag-client",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Node.js client for the Closed-Form Agentic RAG HTTP API",
+  "type": "module",
+  "engines": {"node": ">=18"},
+  "main": "./src/client.js",
+  "types": "./index.d.ts",
+  "exports": {".": {"types": "./index.d.ts", "default": "./src/client.js"}},
+  "files": ["src", "index.d.ts", "README.md"],
+  "scripts": {"test": "node --test tests/client.test.mjs"},
+  "license": "MIT",
+  "author": "Angshul Majumdar",
+  "keywords": ["rag", "llm", "agentic", "orchestration", "api"]
+}

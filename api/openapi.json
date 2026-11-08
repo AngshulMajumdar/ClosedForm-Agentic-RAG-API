@@ -1,0 +1,438 @@
+{
+  "components": {
+    "schemas": {
+      "AnswerRequest": {
+        "properties": {
+          "action_forecasts": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/CandidateBody"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Forecasts"
+          },
+          "allowed_actions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed Actions"
+          },
+          "budgets": {
+            "$ref": "#/components/schemas/Budgets"
+          },
+          "quality_estimates": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quality Estimates"
+          },
+          "question": {
+            "maxLength": 5000,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AnswerRequest",
+        "type": "object"
+      },
+      "Budgets": {
+        "properties": {
+          "deadline_ms": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deadline Ms"
+          },
+          "max_expected_cost_usd": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Expected Cost Usd"
+          },
+          "max_llm_calls": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Llm Calls"
+          },
+          "max_retrieval_calls": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Retrieval Calls"
+          },
+          "price_per_second": {
+            "default": 0.01,
+            "minimum": 0.0,
+            "title": "Price Per Second",
+            "type": "number"
+          },
+          "price_per_usd": {
+            "default": 1.0,
+            "minimum": 0.0,
+            "title": "Price Per Usd",
+            "type": "number"
+          },
+          "stop_utility": {
+            "default": -1.0,
+            "title": "Stop Utility",
+            "type": "number"
+          }
+        },
+        "title": "Budgets",
+        "type": "object"
+      },
+      "CandidateBody": {
+        "properties": {
+          "expected_cost_usd": {
+            "minimum": 0.0,
+            "title": "Expected Cost Usd",
+            "type": "number"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "latency_p95_ms": {
+            "minimum": 0.0,
+            "title": "Latency P95 Ms",
+            "type": "number"
+          },
+          "llm_calls": {
+            "minimum": 0.0,
+            "title": "Llm Calls",
+            "type": "integer"
+          },
+          "predicted_accuracy": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Predicted Accuracy",
+            "type": "number"
+          },
+          "retrieval_calls": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Retrieval Calls",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "predicted_accuracy",
+          "expected_cost_usd",
+          "latency_p95_ms",
+          "llm_calls"
+        ],
+        "title": "CandidateBody",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "RouteRequest": {
+        "properties": {
+          "budgets": {
+            "$ref": "#/components/schemas/Budgets"
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateBody"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Candidates",
+            "type": "array"
+          },
+          "sunk_cost_usd": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Sunk Cost Usd",
+            "type": "number"
+          },
+          "sunk_latency_ms": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Sunk Latency Ms",
+            "type": "number"
+          },
+          "sunk_retrieval_calls": {
+            "default": 0,
+            "minimum": 0.0,
+            "title": "Sunk Retrieval Calls",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "candidates"
+        ],
+        "title": "RouteRequest",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Closed-Form Agentic RAG Orchestrator",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "home__get",
+        "responses": {
+          "200": {
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Home"
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    },
+    "/ready": {
+      "get": {
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready"
+      }
+    },
+    "/v1/answer": {
+      "post": {
+        "operationId": "answer_v1_answer_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnswerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Answer"
+      }
+    },
+    "/v1/route": {
+      "post": {
+        "operationId": "route_v1_route_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RouteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Route"
+      }
+    }
+  }
+}

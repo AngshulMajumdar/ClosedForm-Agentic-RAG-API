@@ -1,0 +1,7 @@
+{
+  "actions": [
+    {"id":"retrieve_fast", "kind":"retrieve", "answer_model":"fast", "top_k":3, "max_answer_tokens":192, "llm_calls":1, "additional_retrievals":0},
+    {"id":"retrieve_strong", "kind":"retrieve", "answer_model":"strong", "top_k":3, "max_answer_tokens":192, "llm_calls":1, "additional_retrievals":0},
+    {"id":"iterative_strong", "kind":"iterative", "query_model":"fast", "answer_model":"strong", "top_k":3, "max_query_tokens":48, "max_answer_tokens":192, "llm_calls":2, "additional_retrievals":1}
+  ]
+}
